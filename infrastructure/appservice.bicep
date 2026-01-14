@@ -1,5 +1,6 @@
 param location string = 'centralus'
 param username string = 'aallshouse'
+param appName string = ''
 
 @allowed(['dev', 'prod'])
 param environment string
@@ -22,7 +23,7 @@ var appServiceProperties = {
 }
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
-  name: 'asp-workshop-dnazghbicep-${username}-${environment}'
+  name: 'asp-${appName}'
   location: location
   sku: {
     name: 'P0V3'
@@ -34,7 +35,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
 }
 
 resource appService 'Microsoft.Web/sites@2022-09-01' = {
-  name: 'app-workshop-dnazghbicep-${username}-${environment}'
+  name: 'app-${appName}'
   location: location
   identity: {
     type: 'SystemAssigned'
